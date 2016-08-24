@@ -481,7 +481,7 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     script.Comment("Stage 3/3")
 
   # Dump fingerprints
-  #script.Print("Target: %s" % target_fp)
+  script.Print("Preparing to flash")
   script.Print("                                 ");
   script.Print("   $$     $$$$$$ $$$$$$ $$$$$    ");
   script.Print("   $$       $$     $$   $$       ");
