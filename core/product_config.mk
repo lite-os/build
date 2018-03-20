@@ -171,6 +171,7 @@ include $(BUILD_SYSTEM)/device.mk
 # A LiteOS build needs only the Cardin product makefiles.
 ifneq ($(LITE_BUILD),)
   all_product_configs := $(shell find device -path "*/$(LITE_BUILD)/lite.mk")
+  all_product_configs += $(wildcard vendor/lite/build/target/product/lite_$(LITE_BUILD).mk)
 else
   ifneq ($(strip $(TARGET_BUILD_APPS)),)
   # An unbundled app build needs only the core product makefiles.
