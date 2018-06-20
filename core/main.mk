@@ -239,16 +239,15 @@ enable_target_debugging := true
 tags_to_install :=
 ifneq (,$(user_variant))
   # Target is secure in user builds.
+  ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=1
   ADDITIONAL_DEFAULT_PROPERTIES += security.perf_harden=1
 
   ifeq ($(user_variant),user)
-    ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=1
     ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=1
   endif
 
   ifeq ($(user_variant),userdebug)
     # Pick up some extra useful tools
-    ADDITIONAL_DEFAULT_PROPERTIES += ro.secure=0
     tags_to_install += debug
   else
     # Disable debugging in plain user builds.
@@ -325,6 +324,10 @@ ADDITIONAL_BUILD_PROPERTIES += net.bt.name=Android
 # Sets the location that the runtime dumps stack traces to when signalled
 # with SIGQUIT. Stack trace dumping is turned on for all android builds.
 ADDITIONAL_BUILD_PROPERTIES += dalvik.vm.stack-trace-dir=/data/anr
+
+# ------------------------------------------------------------
+# Include vendor specific additions to build properties
+-include vendor/lite/build/core/main.mk
 
 # ------------------------------------------------------------
 # Define a function that, given a list of module tags, returns

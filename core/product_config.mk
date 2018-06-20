@@ -171,6 +171,7 @@ include $(BUILD_SYSTEM)/device.mk
 # A LiteOS build needs only the Cardin product makefiles.
 ifneq ($(LITE_BUILD),)
   all_product_configs := $(shell find device -path "*/$(LITE_BUILD)/lite.mk")
+  all_product_configs += $(wildcard vendor/lite/build/target/product/lite_$(LITE_BUILD).mk)
 else
   ifneq ($(strip $(TARGET_BUILD_APPS)),)
   # An unbundled app build needs only the core product makefiles.
@@ -375,6 +376,13 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES := \
 PRODUCT_BUILD_PROP_OVERRIDES := \
     $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_BUILD_PROP_OVERRIDES))
 .KATI_READONLY := PRODUCT_BUILD_PROP_OVERRIDES
+
+# A list of property assignments, like "key = value", with zero or more
+# whitespace characters on either side of the '='.
+# used for adding properties to default.prop of system partition
+PRODUCT_SYSTEM_DEFAULT_PROPERTIES := \
+    $(strip $(PRODUCTS.$(INTERNAL_PRODUCT).PRODUCT_SYSTEM_DEFAULT_PROPERTIES))
+.KATI_READONLY := PRODUCT_SYSTEM_DEFAULT_PROPERTIES
 
 # Should we use the default resources or add any product specific overlays
 PRODUCT_PACKAGE_OVERLAYS := \
