@@ -7,7 +7,7 @@
 # subtype.
 
 whitelisted_modules := framework-res__auto_generated_rro
-
+whitelisted_modules += SettingsProvider__auto_generated_rro SystemUI__auto_generated_rro Bluetooth__auto_generated_rro Settings__auto_generated_rro
 
 ifeq (,$(JAVA_SDK_ENFORCEMENT_ERROR))
   JAVA_SDK_ENFORCEMENT_ERROR := APPS
